@@ -1,32 +1,50 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+  <div>
+    <div class='wrapper'>
+      <!-- Clockコンポーネントを表示 -->
+      <Clock class="clock mx-auto my-5" />
+    </div>
   </div>
 </template>
 
+<script>
+import Clock from "./components/WorldClock"
+
+export default {
+  components: {
+    Clock,
+  },
+}
+</script>
+
+<style scoped>
+.clock {
+  width: 80%;
+  max-width: 600px;
+}
+</style>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@font-face {
+  font-family: 'D7MBI';
+  src: url('digital-7_mono.ttf');
 }
 
-nav {
-  padding: 30px;
+html {
+  font-size: 80%;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+body {
+  background: #000;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.wrapper{
+  /* margin: 50px auto; */
+  margin: 0 auto;
+  width: 960px;
+}
+
+p {
+  margin: 0;
 }
 </style>
