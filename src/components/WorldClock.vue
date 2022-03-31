@@ -9,11 +9,12 @@
         <!-- 日付・計測値（国） -->
         <div class="sub-menus">
           <p class="date">{{ year }}.{{ month }}.{{ day }}</p>
-          <p class="country">日本</p>
+          <p class="location">{{ location }}</p>
         </div>
         <div class="time">
+          <button type="button" class="btn btn-outline-light" @click="handleCloseClock">CLOSE</button>
           <!-- デジタル時計 -->
-          <p class="time-item">{{ hours }}:{{ minutes }}:{{ seconds }}</p>
+          <p class="time-item pt-2">{{ hours }}:{{ minutes }}:{{ seconds }}</p>
         </div>
       </div>
     </div>
@@ -27,6 +28,7 @@ const zeroPadding = (num, digit) => {
 }
 
 export default {
+  props: ["location", "diff"],
   data() {
     return {
       // 本日の日付を定義
@@ -69,6 +71,10 @@ export default {
     // 更新された日付をdateに格納するメソッド
     setDate() {
       this.date = new Date()
+      this.date.setHours(this.date.getHours() + this.diff)
+    },
+    handleCloseClock() {
+      this.$emit('close-clock')
     },
   },
 }
@@ -100,7 +106,7 @@ export default {
   color: #fff;
 }
 
-.country{
+.location{
   font-size: 80px;
   font-family: serif;
   line-height: 1;
@@ -108,7 +114,6 @@ export default {
 
 .time-cover {
   position: absolute;
-  display: flex;
   align-items: center;
   margin-top: 37.5px;
   margin-left: 204px;
@@ -116,11 +121,9 @@ export default {
 }
 
 .time {
-  display: flex;
-  align-items: center;
   color: #fff;
   z-index: 50;
-  padding-top: 6.5%;
+  /* padding-top: 1.1%; */
 }
 
 .time-item {
@@ -129,5 +132,9 @@ export default {
   font-size: 8rem;
   line-height: 1;
   box-sizing: border-box;
+}
+
+.btn{
+  margin-left: 305px;
 }
 </style>
